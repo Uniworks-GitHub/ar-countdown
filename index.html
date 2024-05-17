@@ -7,12 +7,14 @@
   <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js@1.7.6/aframe/build/aframe-ar.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
+    #debug { position: absolute; top: 10px; left: 10px; color: red; z-index: 9999; }
   </style>
 </head>
 <body>
+  <div id="debug">Loading...</div>
   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-    <a-marker preset="hiro">
-      <a-entity id="countdown" position="0 0 0" rotation="-90 0 0" scale="0.5 0.5 0.5">
+    <a-marker type='pattern' url='https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/data/patt.hiro'>
+      <a-entity id="countdown" position="0 0.5 0" rotation="-90 0 0" scale="0.5 0.5 0.5">
         <a-text id="days" value="00" color="yellow" position="-2 0 0" width="4"></a-text>
         <a-text value="d" color="yellow" position="-1.5 0 0" width="4"></a-text>
         <a-text id="hours" value="00" color="yellow" position="-1 0 0" width="4"></a-text>
@@ -32,6 +34,7 @@
     const hoursText = document.getElementById('hours');
     const minutesText = document.getElementById('minutes');
     const secondsText = document.getElementById('seconds');
+    const debugText = document.getElementById('debug');
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -42,6 +45,7 @@
         hoursText.setAttribute('value', "00");
         minutesText.setAttribute('value', "00");
         secondsText.setAttribute('value', "00");
+        debugText.innerHTML = "Countdown has ended.";
         return;
       }
 
@@ -54,6 +58,7 @@
       hoursText.setAttribute('value', hours.toString().padStart(2, '0'));
       minutesText.setAttribute('value', minutes.toString().padStart(2, '0'));
       secondsText.setAttribute('value', seconds.toString().padStart(2, '0'));
+      debugText.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     };
 
     setInterval(updateCountdown, 1000);
