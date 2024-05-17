@@ -29,7 +29,7 @@
   </a-scene>
 
   <script>
-    const countdownDate = new Date("Dec 31, 2024 00:00:00").getTime();
+    const countdownDate = new Date("May 28, 2024 19:00:00").getTime();
     const daysText = document.getElementById('days');
     const hoursText = document.getElementById('hours');
     const minutesText = document.getElementById('minutes');
@@ -48,9 +48,18 @@
       hoursText.setAttribute('value', hours.toString().padStart(2, '0'));
       minutesText.setAttribute('value', minutes.toString().padStart(2, '0'));
       secondsText.setAttribute('value', seconds.toString().padStart(2, '0'));
+
+      if (distance < 0) {
+        clearInterval(x);
+        daysText.setAttribute('value', "00");
+        hoursText.setAttribute('value', "00");
+        minutesText.setAttribute('value', "00");
+        secondsText.setAttribute('value', "00");
+        countdownElement.innerHTML = "EXPIRED";
+      }
     };
 
-    setInterval(updateCountdown, 1000);
+    const x = setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 </body>
