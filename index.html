@@ -6,12 +6,10 @@
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.6/aframe/build/aframe-ar.js"></script>
   <style>
-    body { margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: black; }
-    #countdown { font-size: 3em; color: white; text-align: center; position: absolute; z-index: 9999; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    body { margin: 0; overflow: hidden; }
   </style>
 </head>
 <body>
-  <div id="countdown">Loading...</div>
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
       <a-entity position="0 0.5 0">
@@ -39,6 +37,14 @@
       const now = new Date().getTime();
       const distance = countdownDate - now;
 
+      if (distance < 0) {
+        daysText.setAttribute('value', "00");
+        hoursText.setAttribute('value', "00");
+        minutesText.setAttribute('value', "00");
+        secondsText.setAttribute('value', "00");
+        return;
+      }
+
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -48,18 +54,9 @@
       hoursText.setAttribute('value', hours.toString().padStart(2, '0'));
       minutesText.setAttribute('value', minutes.toString().padStart(2, '0'));
       secondsText.setAttribute('value', seconds.toString().padStart(2, '0'));
-
-      if (distance < 0) {
-        clearInterval(x);
-        daysText.setAttribute('value', "00");
-        hoursText.setAttribute('value', "00");
-        minutesText.setAttribute('value', "00");
-        secondsText.setAttribute('value', "00");
-        countdownElement.innerHTML = "EXPIRED";
-      }
     };
 
-    const x = setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 </body>
