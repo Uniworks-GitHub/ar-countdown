@@ -12,15 +12,15 @@
 <body>
   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
     <a-marker preset="hiro">
-      <a-entity position="0 0.5 0">
-        <a-text id="days" value="00" color="yellow" position="-1 0 0"></a-text>
-        <a-text value="d" color="yellow" position="-0.5 0 0"></a-text>
-        <a-text id="hours" value="00" color="yellow" position="0 0 0"></a-text>
-        <a-text value="h" color="yellow" position="0.5 0 0"></a-text>
-        <a-text id="minutes" value="00" color="yellow" position="1 0 0"></a-text>
-        <a-text value="m" color="yellow" position="1.5 0 0"></a-text>
-        <a-text id="seconds" value="00" color="yellow" position="2 0 0"></a-text>
-        <a-text value="s" color="yellow" position="2.5 0 0"></a-text>
+      <a-entity id="countdown" position="0 0.5 0" rotation="-90 0 0">
+        <a-text id="days" value="00" color="yellow" position="-1.5 0 0" width="3"></a-text>
+        <a-text value="d" color="yellow" position="-1 0 0" width="3"></a-text>
+        <a-text id="hours" value="00" color="yellow" position="-0.5 0 0" width="3"></a-text>
+        <a-text value="h" color="yellow" position="0 0 0" width="3"></a-text>
+        <a-text id="minutes" value="00" color="yellow" position="0.5 0 0" width="3"></a-text>
+        <a-text value="m" color="yellow" position="1 0 0" width="3"></a-text>
+        <a-text id="seconds" value="00" color="yellow" position="1.5 0 0" width="3"></a-text>
+        <a-text value="s" color="yellow" position="2 0 0" width="3"></a-text>
       </a-entity>
     </a-marker>
     <a-entity camera></a-entity>
